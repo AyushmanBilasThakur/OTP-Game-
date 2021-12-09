@@ -1,0 +1,29 @@
+{
+    "sites": [
+        {
+            "site_name": "boogle",
+            "site_url": "https://www.boogle.com",
+            "site_description": "Enter your otp to check your email"
+        },
+        {
+            "site_name": "brooks",
+            "site_url": "https://www.brooks.com",
+            "site_description": "Enter the world of social media"
+        },
+        {
+            "site_name": "vbank",
+            "site_url": "https://www.vbank.com",
+            "site_description": "To check your bank balance plese enter the otp"
+        },
+        {
+            "site_name": "geobank",
+            "site_url": "https://www.geobank.com",
+            "site_description": "Netbanking via geobank requires your otp"
+        },
+        {
+            "site_name": "moment",
+            "site_url": "https://www.moment.com",
+            "site_description": "Your moments are safe and special"
+        }
+    ]
+}
