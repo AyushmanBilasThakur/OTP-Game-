@@ -18,10 +18,15 @@ function MessageBox(props: IProps) {
 
     useEffect(() => {
         
-        timeoutTime -= 500 * Math.floor(score / 5)
+        
+
+        timeoutTime -= Math.min(3000, 500 * Math.floor(score / 5));
         
         if(messageBox.current != null){
             messageBox.current.classList.add("slide-in")
+            if(score == 0) {
+                return;
+            }
             timeoutListener = setTimeout(removeMessage,timeoutTime)
         }
     }, [messageBox.current])

@@ -49,9 +49,7 @@ function Game() {
     return (
         <div className="centered" ref={centered}>
             
-            <a href="/" className="link">
-                &lt;- Back to main menu
-            </a>
+            
             {
                 isGameOver ?
                     <>
@@ -93,7 +91,14 @@ function Game() {
 
             }
             <br />
-            <a href="/game" className="btn btn-green">Restart</a>
+
+            <div className="nav-buttons">
+
+                <a href="/game" className="btn btn-green">Restart</a>
+                <Link to="/" className="btn btn-red">
+                        &lt;- Back to main menu
+                </Link>
+            </div>
         </div>
     )
 }

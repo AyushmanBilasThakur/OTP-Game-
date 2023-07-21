@@ -6,7 +6,7 @@ function GameOver() {
 
     const score = useSelector((state: RootState) =>  state.score.score);
         return (
-        <div className="centered">
+        <div className="centered game-over">
             <h1>Game Over!</h1>
             <p>Your Score: {score}</p>
         </div>

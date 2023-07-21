@@ -86,6 +86,7 @@ function Browser(props: any) {
                         </div>
                 }
 
+                
                 <button className="btn btn-green" onClick={() => checkOTP()}>
                     Send OTP
                 </button>

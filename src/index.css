@@ -31,11 +31,12 @@ body{
 
 .centered{
     overflow-x: hidden;
-    background-color: #28252D;
-    display: flex;
-    min-height: 100vh;
-    width: 350px;
+    background-color: #150929;
+    max-height: 100vh;
+    max-width: 100vw;
+    aspect-ratio: 9 /16;
     margin: 0 auto;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;  
@@ -44,16 +45,58 @@ body{
 }
 
 .centered h1{
-  font-size: 4rem;
-  margin-bottom: 30px;
+  font-size: 3rem;
   text-align: center;
+}
+
+.title-pitcher{
+  margin-bottom: 30px;
+}
+
+.title-pitcher p {
+  text-align: center;
+  color: lavender;
+}
+
+.about{
+  margin: 10px 0;
+}
+
+.about h3{
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.note{
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, 30px);
+  font-size: 20px;
+  text-align: left;
+  color: white;
+  font-weight: bold;
+  font-size: small;
+  text-align: center;
+}
+
+#messageBoxLocator{
+  position: absolute;
+  top: 50px;
+  right: 250px;
+  width: 10px;
+  height: 10px;
 }
 
 .btn{
   display: block;
   text-decoration: none;
-  color: #EBE8C9;
-  width: 100%;
+  color: #000000;
+  font-weight: bold;
+  width: 70%;
+  min-width: 250px;
+  margin: 0 auto;
   cursor: pointer;
   padding: 10px 20px;
   text-align: center;
@@ -62,16 +105,24 @@ body{
   border-radius: 10px;
 }
 
+.nav-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
 .btn-green{
-  background-color: #82BFC9;
-  transition: background-color 0.3s ease;
+  background-color: #39dd90;
+  transition: background-color 0.3s ease,
+              color 0.3s ease;
   font-weight: bold;
   color: #28252D;
 }
 
 .btn-green:hover{
-  background-color: #5C8499;
-  color: #EBE8C9;
+  background-color: #084637;
+  color: white;
 }
 
 .btn-red{
@@ -91,7 +142,7 @@ body{
   top: 50px;
   right: 0;
   width: 250px;
-  background-color: #EBE8C9;
+  background-color: #e2ff92;
   color:#28252D;
   padding: 20px;
   border-radius: 10px 0 0 10px;
@@ -101,6 +152,7 @@ body{
 
 .message-box h3{
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 
@@ -110,14 +162,20 @@ body{
   left: -15px;
   width: 30px;
   height: 30px;
-  background-color: #BA615F;
+  background-color: #ff7775;
+  transition: background-color 0.3s ease;
   border-radius: 50%;
   border: none;
   outline: none;
   cursor: pointer;
-  color: #EBE8C9;
+  color: black;
   font-weight: bold;
 }
+
+.message-box .close-button:hover{
+  background-color: #fdb2b1;
+}
+
 
 .browser-container{
   background-color: white;
@@ -154,6 +212,7 @@ body{
   transform: translateX(300px);
   animation: slide-in-animation 0.4s ease forwards;
 }
+
 @keyframes slide-in-animation {
   0%{
     transform: translateX(300px);
@@ -213,16 +272,16 @@ body{
 
 .browser-container{
   position: relative;
+  /* overflow: hidden; */
 }
 
 .browser-container progress{
-  border-radius: 20px 20px 0 0;
+  border-radius: 10px 10px 0 0;
   width: 100%;
 
 }
 
 .browser-container progress::-webkit-progress-bar{
-  border-radius: 10px;
   height: 15px;
   background-color: transparent;
 }
