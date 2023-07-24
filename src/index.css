@@ -13,6 +13,9 @@ p, h1, button, a, div, h2, h3,input, progress{
 body{
   background-color: black;
   color: #EBE8C9;
+  width: 100vw;
+  height: 100vh; 
+  overflow: hidden;
 }
 
 .link{
@@ -26,11 +29,12 @@ body{
 }
 
 .container{
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .centered{
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: #150929;
     max-height: 100vh;
     max-width: 100vw;
@@ -131,6 +135,7 @@ body{
 }
 
 dialog {
+  position: absolute;
   background: #1e0036;
   /* border: none; */
   border-color: #82c7ff;
@@ -138,9 +143,17 @@ dialog {
   padding: 10px;
   font-size: larger;
   text-align: center;
+  z-index: 5;
 }
 
-dialog::backdrop{
+dialog::after{
+  content: "";
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+  width: 150vw;
+  height: 150vh;
+  z-index: -1;
   background: rgba(0, 0, 0, 0.74);
 }
 
