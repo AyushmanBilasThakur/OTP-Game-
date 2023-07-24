@@ -1,18 +1,28 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import {useDispatch, useSelector, } from 'react-redux';
 
 import { RootState } from '../store';
-import { decrementLife, decrementScore, incrementScore, setIsGameOver } from '../store/scoreSlice';
+import { decrementLife, incrementScore, setIsGameOver } from '../store/scoreSlice';
 
-function Browser(props: any) {
+const Browser = ({
+    children,
+    loadNewSite,
+    url,
+    isResettingGame
+}: {
+    loadNewSite: Function,
+    url: string,
+    isResettingGame: boolean
+} & React.ComponentProps<any>) => {
 
     const currentSites = useSelector((state: RootState) => state.currentSites)
 
     const [otp, setOTP] = useState(""); 
     const score = useSelector((state: RootState) => state.score.score)
-    const dispatch = useDispatch();
+    const isGameOver = useSelector((state: RootState) => state.score.isGameOver);
     const [isCurrentOTPCorrect, setIsCurrentOTPCorrect] = useState(true);
-
+    
+    const dispatch = useDispatch();
     const inp: any = useRef(null);
 
     function checkOTP(){
@@ -28,38 +38,49 @@ function Browser(props: any) {
         else{
             dispatch(incrementScore());
             setOTP("");
-            props.loadNewSite();
+            loadNewSite();
             setIsCurrentOTPCorrect(true);
         }
         if(inp.current){
             inp.current.focus();
         }
     }
-    let maxTime
+
+    
+    let maxTime: number;
+    let timerHolder: number;
     
     const [timer, setTimer] = useState(maxTime = (10 - score % 5));
-    let x: number;
+    
+    const resetTime = () => {
+        maxTime = (10 - score % 5);
+    
+        setTimer(maxTime);
+    
+        timerHolder = setInterval(() => {
+            setTimer(prevTime => prevTime - 1)
+        }, 1000);
+    }
+
+    useEffect(() => {
+        if(isGameOver == true){
+            resetTime();
+        }
+    }, [isResettingGame])
+
     useEffect(() => {
         
-        let p = async () => {
-            maxTime = (10 - score % 5);
-            await setTimer(maxTime);
-            x = setInterval(() => {
-                 setTimer(prevTime => prevTime - 1)
-            }, 1000)
-        }
-
-        p();
-
+        resetTime();
         return(() => {
-            clearInterval(x);
+            resetTime();
+            clearInterval(timerHolder); 
+           
         })
-        
     }, [])
 
     useEffect(() => {
         if(timer < 0){
-            clearInterval(x);
+            // clearInterval(timerHolder);
             dispatch(setIsGameOver(true));
         }
     }, [timer])
@@ -69,11 +90,11 @@ function Browser(props: any) {
     return (
         <div className="browser-container">
             <progress value={timer} max={maxTime} /> 
-            <div className="title-bar">{props.url}</div>
+            <div className="title-bar">{url}</div>
             <div className="browser-body">
 
 
-                {props.children}
+                {children}
                 
                 <input autoFocus aria-autocomplete="none" name="game" ref={inp} type="number" autoComplete="none" accept="number" typeof="number" placeholder="Please enter the OTP here" value={otp} onChange={(e) => setOTP(e.target.value)} onKeyPress={(e) => {if(e.key == "Enter"){checkOTP()}}}/>
 

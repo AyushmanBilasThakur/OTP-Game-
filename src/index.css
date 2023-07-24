@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-*{
+p, h1, button, a, div, h2, h3,input, progress{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -45,8 +45,16 @@ body{
 }
 
 .centered h1{
-  font-size: 3rem;
+  font-size: 40px;
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.highscore{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important; 
+  color: #ffdd1a !important;
+  font-weight: bold !important;
 }
 
 .title-pitcher{
@@ -70,15 +78,22 @@ body{
 
 .note{
   position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, 30px);
+  top: 100px;
+  left: 20px;
+  max-width: 90px;
+  padding-right: 10px;
+  color: #E2FF92;
+  /* transform: translate(-50%, 30px); */
   font-size: 20px;
-  text-align: left;
-  color: white;
+  text-align: right;
   font-weight: bold;
   font-size: small;
-  text-align: center;
+}
+
+@media (max-width: 350px){
+  .note, .arrowWrapper{
+    display: none;
+  }
 }
 
 #messageBoxLocator{
@@ -90,7 +105,10 @@ body{
 }
 
 .btn{
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   color: #000000;
   font-weight: bold;
@@ -112,6 +130,28 @@ body{
   margin-top: 20px;
 }
 
+dialog {
+  background: #1e0036;
+  /* border: none; */
+  border-color: #82c7ff;
+  color: white;
+  padding: 10px;
+  font-size: larger;
+  text-align: center;
+}
+
+dialog::backdrop{
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+}
+
 .btn-green{
   background-color: #39dd90;
   transition: background-color 0.3s ease,
@@ -126,15 +166,16 @@ body{
 }
 
 .btn-red{
-  background-color: #BA615F;
-  transition: background-color 0.3s ease;
+  background-color: #ff6461;
+  transition: background-color 0.3s ease,
+              color 0.3s ease;
   font-weight: bold;
-  color: #EBE8C9;
+  color: #000000;
 }
 
 .btn-red:hover{
-  background-color: #7A4D49;
-  color: #EBE8C9;
+  background-color: #5a0800;
+  color: #fff372;
 }
 
 .message-box{
@@ -176,26 +217,55 @@ body{
   background-color: #fdb2b1;
 }
 
+.scorebar{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+.lives{
+  display: flex;
+  gap: 10px;
+}
 
 .browser-container{
   background-color: white;
   border-radius: 10px;
   width: 300px;
+  padding: 10px;
   color: #28252D;
+  position: relative;
+  padding-top: 30px;
+}
+
+.browser-container progress{
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.browser-container progress::-webkit-progress-bar{
+  height: 15px;
+  background-color: transparent;
+}
+
+
+.browser-container progress::-webkit-progress-value{
+  background-color:#e94732;
+  border-radius: 10px;
 }
 
 .browser-container .title-bar{
+  margin-bottom: 10px;
   padding: 10px;
-  margin: 10px;
   border-radius: 10px;
   background-color: #EBE8C9;
   border: 2px solid #28252D;
 }
 
-.browser-container .browser-body{
-  padding: 0 10px;
-  margin: 10px;
-}
 
 .browser-container input {
   padding: 5px;
@@ -206,6 +276,7 @@ body{
 
 .browser-container button{
   margin: 10px 0;
+  width: 100%;
 }
 
 .slide-in{
@@ -247,7 +318,6 @@ body{
 
 .score{
   font-size: 1.4rem;
-  margin-bottom: 10px;
 }
 
 .flash{
@@ -270,24 +340,40 @@ body{
   }
 }
 
-.browser-container{
+.final-score{
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+
+
+
+.highscoreHolder{
   position: relative;
-  /* overflow: hidden; */
 }
 
-.browser-container progress{
-  border-radius: 10px 10px 0 0;
-  width: 100%;
-
+.recordflash{
+  position: absolute;
+  top: 0;
+  right: -30px;
+  text-align: center;
+  color: #ffe600;
+  width: 100px;
+  padding: 10px;
+  font-weight: bold;
+  rotate: 30deg;
+  animation: bob 0.2s ease infinite alternate;
 }
 
-.browser-container progress::-webkit-progress-bar{
-  height: 15px;
-  background-color: transparent;
+@keyframes bob {
+  0%{
+    transform: scale(0.7);
+  }
+  100%{
+    transform: scale(1.3);
+  }
 }
 
-
-.browser-container progress::-webkit-progress-value{
-  background-color:#82BFC9;
-  border-radius: 10px;
+.game-over{
+  text-align: center;
 }

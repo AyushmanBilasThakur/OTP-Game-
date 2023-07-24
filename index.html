@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image" href="/src/locky.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="A simple game about entering OTP and scoring points">
+    <meta property="og:title" content="The OTP Game" />
+    <meta property="og:description" content="A simple game about entering OTP and scoring points" />
+    <meta property="og:image" content="/src/locky.png" />
     <title>The OTP Game</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      console.log('%cWarning\n%cDon\'t use the console and leak any values to others it can be used by hackers to trick you to give them your cookies!', 'color: red; font-size: 30px; margin-bottom: 10px', 'color: yellow');
+    </script>
   </body>
 </html>

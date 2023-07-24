@@ -1,6 +1,5 @@
 import Browser from '../components/Browser'
 import MessageBox from '../components/MessageBox'
-import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store';
 import { useEffect, useRef, useState } from 'react';
@@ -8,13 +7,20 @@ import loadNextSite from '../utility/loadNextSite';
 import getOTP from '../utility/getOtP';
 import { add_site, remove_first_site } from '../store/currentSitesSlice';
 import { useDispatch } from 'react-redux';
-import { setIsGameOver } from '../store/scoreSlice';
+import { setIsGameOver, setScore, setLife } from '../store/scoreSlice';
+import { useNavigate } from 'react-router-dom';
+import GameOver from './GameOver';
+import HighscoreButton from '../components/HighscoreButton';
+import Icon from '@mdi/react';
+import { mdiHead, mdiHeart, mdiPacMan, mdiScoreboard } from '@mdi/js';
 
 function Game() {
 
+    const navigate = useNavigate();
+
     const score = useSelector((state: RootState) => state.score.score);
     const isGameOver = useSelector((state: RootState) => state.score.isGameOver);
-
+    // const highScore = useSelector((state: RootState) =>  state.score.highScore);
     const life = useSelector((state: RootState) => state.score.life);
     const centered: any = useRef(null);
     const currentSites = useSelector((state: RootState) => state.currentSites);
@@ -22,6 +28,7 @@ function Game() {
     const dispatch = useDispatch();
 
     const [messageText, setMessageText] = useState("");
+    const [isResettingGame, setResttingGame] = useState(false);
     const [messageTitle, setMessageTitle] = useState("");
 
     const loadNewSite = () => {
@@ -43,8 +50,23 @@ function Game() {
         }
     }, [life])
 
+    const resetGame = () => {
+        setResttingGame(true);
+        dispatch(setIsGameOver(false));
+        dispatch(setScore(0));
+        dispatch(setLife(3));
+    }
 
 
+    const backToMenu = () =>{
+        resetGame();
+        navigate("/");
+    }
+
+    const backToGame = () =>{
+        resetGame();
+        navigate(0);
+    }
      
     return (
         <div className="centered" ref={centered}>
@@ -52,16 +74,34 @@ function Game() {
             
             {
                 isGameOver ?
-                    <>
-                        <h1>Game Over!</h1>
-                        <p>You scored: {score}</p>
-                    </>
+                    <GameOver />
                     :
                     <>
                         
+                        <div className='scorebar'>
 
-                        <h3 className="score">Score: {score}</h3>
-                        <h3 className="score">Errors allowed: {life}</h3>
+                            <h3 className="score">
+                                <Icon
+                                    path={mdiPacMan}
+                                    size={0.7} 
+                                    style={{marginRight: "5px"}}
+                                />
+
+                                {score}</h3>
+                            <div className="lives">
+                                {
+                                    new Array(life).fill(0).map((_,i) => (
+                                        <Icon 
+                                            key={i}
+                                            path={mdiHeart}
+                                            color="red"
+                                            size={1}
+                                        />
+                                    ))
+                                }
+                            </div>
+                        </div>
+
                         {/* <h3 className="score">Time: {timer}</h3> */}
 
                         {
@@ -70,6 +110,7 @@ function Game() {
                                     url={currentSites[0].site_url} 
                                     key={currentSites[0].site_url + currentSites[0].otp}
                                     loadNewSite={loadNewSite}
+                                    isResettingGame={isResettingGame}
                                 >
                                     <p>{currentSites[0].site_description}</p>
                                 </Browser>
@@ -94,10 +135,13 @@ function Game() {
 
             <div className="nav-buttons">
 
-                <a href="/game" className="btn btn-green">Restart</a>
-                <Link to="/" className="btn btn-red">
+                <button onClick={backToGame} className="btn btn-green">Restart</button>
+                <button onClick={backToMenu} className="btn btn-red">
                         &lt;- Back to main menu
-                </Link>
+                </button>
+                {
+                    isGameOver && <HighscoreButton />
+                }
             </div>
         </div>
     )
