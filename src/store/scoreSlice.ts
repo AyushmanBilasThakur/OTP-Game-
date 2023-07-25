@@ -31,7 +31,7 @@ const scoreSlice = createSlice({
             state.isGameOver = payload;
         },
         setHighScore(state, { payload } : {payload: number}){
-            localStorage.setItem("hs", payload.toString());
+            localStorage.setItem("hs", String(payload));
             state.highScore = payload;
         }
     }

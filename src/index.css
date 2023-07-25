@@ -82,7 +82,7 @@ body{
 
 .note{
   position: absolute;
-  top: 100px;
+  top: 70px;
   left: 20px;
   max-width: 90px;
   padding-right: 10px;
@@ -134,27 +134,43 @@ body{
   margin-top: 20px;
 }
 
-dialog {
-  position: absolute;
+.dialog {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
   background: #1e0036;
   /* border: none; */
-  border-color: #82c7ff;
+  border: 2px solid #82c7ff;
   color: white;
   padding: 10px;
   font-size: larger;
   text-align: center;
   z-index: 5;
+  width: calc(100vh * 9 / 16 - 50px);
+  
 }
 
-dialog::after{
+.dialog::after{
   content: "";
-  position: absolute;
-  top: -100vh;
+  position: fixed;
+  top:-100vh;
   left: -100vw;
-  width: 150vw;
-  height: 150vh;
+  width: 200vw;
+  height: 200vh;
   z-index: -1;
   background: rgba(0, 0, 0, 0.74);
+}
+
+.dialog p{
+  margin-bottom: 20px;
+}
+
+.dialog .flex .btn-red,
+.dialog .flex .btn-green{
+  min-width: 0 !important;
+  width: auto;
+  margin: 0 !important;
 }
 
 .flex{
@@ -235,11 +251,13 @@ dialog::after{
   justify-content: space-between;
   margin-bottom: 10px;
   width: 300px;
+  color: #f3e741;
 }
 
 .lives{
   display: flex;
   gap: 10px;
+  color: #e23939;
 }
 
 .browser-container{

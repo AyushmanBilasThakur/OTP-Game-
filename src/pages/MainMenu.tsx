@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
-import { Xwrapper } from 'react-xarrows';
-import Xarrow from "react-xarrows";
 import {  useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useEffect } from "react";
@@ -30,28 +28,12 @@ function MainMenu(){
                 message="Game version 0.5"
             />
 
-            <Xwrapper>
 
-                <div id="messageBoxLocator"></div>
+            <p id="importantInfo" className="note">
+                Keep an eye over here, the OTP Messages will come and go 
+            </p>
 
-                <p id="importantInfo" className="note">
-                    Keep an eye over here, the OTP Messages will come and go 
-                </p>
-
-                <div className="arrowWrapper">
-                    <Xarrow 
-                        start={"importantInfo"} 
-                        end={"messageBoxLocator"} 
-                        startAnchor={"auto"}
-                        endAnchor={"auto"}
-                        color="#eee"
-                        curveness={1}
-                        dashness={true}
-                    />
-                </div>
-
-
-            </Xwrapper>
+            
 
             <div className="title-pitcher">
                 <h1>The OTP Game</h1>

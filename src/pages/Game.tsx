@@ -11,8 +11,7 @@ import { setIsGameOver, setScore, setLife } from '../store/scoreSlice';
 import { useNavigate } from 'react-router-dom';
 import GameOver from './GameOver';
 import HighscoreButton from '../components/HighscoreButton';
-import Icon from '@mdi/react';
-import { mdiHead, mdiHeart, mdiPacMan, mdiScoreboard } from '@mdi/js';
+import { ImHeart, ImPacman, ImBackward } from 'react-icons/im';
 
 function Game() {
 
@@ -81,22 +80,12 @@ function Game() {
                         <div className='scorebar'>
 
                             <h3 className="score">
-                                <Icon
-                                    path={mdiPacMan}
-                                    size={0.7} 
-                                    style={{marginRight: "5px"}}
-                                />
-
-                                {score}</h3>
+                                <ImPacman />&nbsp;&nbsp;{score}
+                            </h3>
                             <div className="lives">
                                 {
                                     new Array(life).fill(0).map((_,i) => (
-                                        <Icon 
-                                            key={i}
-                                            path={mdiHeart}
-                                            color="red"
-                                            size={1}
-                                        />
+                                       <ImHeart id={`${i}`}/>
                                     ))
                                 }
                             </div>
@@ -137,7 +126,7 @@ function Game() {
 
                 <button onClick={backToGame} className="btn btn-green">Restart</button>
                 <button onClick={backToMenu} className="btn btn-red">
-                        &lt;- Back to main menu
+                        <ImBackward />&nbsp;&nbsp;Back to main menu
                 </button>
                 {
                     isGameOver && <HighscoreButton />
