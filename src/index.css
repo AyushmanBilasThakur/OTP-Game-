@@ -1,67 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
-p, h1, button, a, div, h2, h3,input, progress{
+p,
+h1,
+button,
+a,
+div,
+h2,
+h3,
+input,
+progress {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Questrial', sans-serif;
+  font-family: "Questrial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body{
+body {
   background-color: black;
-  color: #EBE8C9;
+  color: #ebe8c9;
   width: 100vw;
-  height: 100vh; 
+  height: 100vh;
   overflow: hidden;
 }
 
-.link{
+.link {
   display: block;
   font-size: 1rem;
-  color: #EBE8C9;
+  color: #ebe8c9;
   margin-bottom: 10px;
   text-decoration: none;
   position: absolute;
   top: 10px;
 }
 
-.container{
+.container {
   height: 100vh;
   overflow: hidden;
 }
 
-.centered{
-    overflow: hidden;
-    background-color: #150929;
-    max-height: 100vh;
-    max-width: 100vw;
-    aspect-ratio: 9 /16;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;  
-    padding: 30px;
-    position: relative;
+.centered {
+  overflow: hidden;
+  background-color: #150929;
+  max-height: 100vh;
+  max-width: 100vw;
+  aspect-ratio: 9 /16;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  position: relative;
 }
 
-.centered h1{
+.centered h1 {
   font-size: 40px;
   text-align: center;
   margin-bottom: 20px;
 }
 
-.highscore{
+.highscore {
   margin-top: 10px !important;
-  margin-bottom: 10px !important; 
+  margin-bottom: 10px !important;
   color: #ffdd1a !important;
   font-weight: bold !important;
 }
 
-.title-pitcher{
+.title-pitcher {
   margin-bottom: 30px;
 }
 
@@ -70,23 +78,23 @@ body{
   color: lavender;
 }
 
-.about{
+.about {
   margin: 10px 0;
 }
 
-.about h3{
+.about h3 {
   margin-bottom: 5px;
   font-weight: bold;
   text-align: center;
 }
 
-.note{
+.note {
   position: absolute;
   top: 70px;
   left: 20px;
   max-width: 90px;
   padding-right: 10px;
-  color: #E2FF92;
+  color: #e2ff92;
   /* transform: translate(-50%, 30px); */
   font-size: 20px;
   text-align: right;
@@ -94,13 +102,14 @@ body{
   font-size: small;
 }
 
-@media (max-width: 350px){
-  .note, .arrowWrapper{
+@media (max-width: 350px) {
+  .note,
+  .arrowWrapper {
     display: none;
   }
 }
 
-#messageBoxLocator{
+#messageBoxLocator {
   position: absolute;
   top: 50px;
   right: 250px;
@@ -108,7 +117,7 @@ body{
   height: 10px;
 }
 
-.btn{
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,7 +136,7 @@ body{
   border-radius: 10px;
 }
 
-.nav-buttons{
+.nav-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -148,13 +157,12 @@ body{
   text-align: center;
   z-index: 5;
   width: calc(100vh * 9 / 16 - 50px);
-  
 }
 
-.dialog::after{
+.dialog::after {
   content: "";
   position: fixed;
-  top:-100vh;
+  top: -100vh;
   left: -100vw;
   width: 200vw;
   height: 200vh;
@@ -162,18 +170,18 @@ body{
   background: rgba(0, 0, 0, 0.74);
 }
 
-.dialog p{
+.dialog p {
   margin-bottom: 20px;
 }
 
 .dialog .flex .btn-red,
-.dialog .flex .btn-green{
+.dialog .flex .btn-green {
   min-width: 0 !important;
   width: auto;
   margin: 0 !important;
 }
 
-.flex{
+.flex {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -181,52 +189,52 @@ body{
   gap: 10px;
 }
 
-.btn-green{
+.btn-green {
   background-color: #39dd90;
-  transition: background-color 0.3s ease,
-              color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   font-weight: bold;
-  color: #28252D;
+  color: #28252d;
 }
 
-.btn-green:hover{
+.btn-green:hover {
   background-color: #084637;
   color: white;
 }
 
-.btn-red{
+.btn-red {
   background-color: #ff6461;
-  transition: background-color 0.3s ease,
-              color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
   font-weight: bold;
   color: #000000;
 }
 
-.btn-red:hover{
+.btn-red:hover {
   background-color: #5a0800;
   color: #fff372;
 }
 
-.message-box{
+.message-box {
   position: absolute;
   top: 50px;
   right: 0;
   width: 250px;
   background-color: #e2ff92;
-  color:#28252D;
+  color: #28252d;
   padding: 20px;
   border-radius: 10px 0 0 10px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-
-.message-box h3{
+.message-box h3 {
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-
-.message-box .close-button{
+.message-box .close-button {
   position: absolute;
   top: -15px;
   left: -15px;
@@ -242,11 +250,11 @@ body{
   font-weight: bold;
 }
 
-.message-box .close-button:hover{
+.message-box .close-button:hover {
   background-color: #fdb2b1;
 }
 
-.scorebar{
+.scorebar {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -254,23 +262,23 @@ body{
   color: #f3e741;
 }
 
-.lives{
+.lives {
   display: flex;
   gap: 10px;
   color: #e23939;
 }
 
-.browser-container{
+.browser-container {
   background-color: white;
   border-radius: 10px;
   width: 300px;
   padding: 10px;
-  color: #28252D;
+  color: #28252d;
   position: relative;
   padding-top: 30px;
 }
 
-.browser-container progress{
+.browser-container progress {
   border-radius: 5px 5px 0 0;
   width: 100%;
   position: absolute;
@@ -278,25 +286,23 @@ body{
   left: 0;
 }
 
-.browser-container progress::-webkit-progress-bar{
+.browser-container progress::-webkit-progress-bar {
   height: 15px;
   background-color: transparent;
 }
 
-
-.browser-container progress::-webkit-progress-value{
-  background-color:#e94732;
+.browser-container progress::-webkit-progress-value {
+  background-color: #e94732;
   border-radius: 10px;
 }
 
-.browser-container .title-bar{
+.browser-container .title-bar {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px;
-  background-color: #EBE8C9;
-  border: 2px solid #28252D;
+  background-color: #ebe8c9;
+  border: 2px solid #28252d;
 }
-
 
 .browser-container input {
   padding: 5px;
@@ -305,85 +311,82 @@ body{
   margin: 10px 0;
 }
 
-.browser-container button{
+.browser-container button {
   margin: 10px 0;
   width: 100%;
 }
 
-.slide-in{
+.slide-in {
   transform: translateX(300px);
   animation: slide-in-animation 0.4s ease forwards;
 }
 
 @keyframes slide-in-animation {
-  0%{
+  0% {
     transform: translateX(300px);
   }
-  100%{
+  100% {
     transform: translateX(0);
   }
 }
 
-.fade-up-and-over{
+.fade-up-and-over {
   animation: fade-up-and-over-animation 0.4s ease forwards;
 }
 
 @keyframes fade-up-and-over-animation {
-  0%{
+  0% {
     transform: translateY(0px);
     opacity: 1;
   }
-  100%{
+  100% {
     transform: translateY(-300px);
     opacity: 0;
   }
 }
 
-.danger{
-  background-color: #BA615F;
+.danger {
+  background-color: #ba615f;
   color: #000000;
   padding: 10px;
-  border: 2px solid #7a4D49;
+  border: 2px solid #7a4d49;
   border-radius: 5px;
 }
 
-.score{
+.score {
   font-size: 1.4rem;
 }
 
-.flash{
+.flash {
   position: relative;
 }
 
-.flash::after{
- content: "";
- position: absolute;
- top: 0;
- left: 0;
- z-index: 2;
- width: 100vw;
- height: 100vh;
- animation: flash ease 1s forwards;
+.flash::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  animation: flash ease 1s forwards;
 }
 @keyframes flash {
-  50%{
-  background-color: rgba(255, 0, 0, 0.5);
+  50% {
+    background-color: rgba(255, 0, 0, 0.5);
   }
 }
 
-.final-score{
+.final-score {
   margin-top: 10px;
   font-size: 18px;
 }
 
-
-
-
-.highscoreHolder{
+.highscoreHolder {
   position: relative;
 }
 
-.recordflash{
+.recordflash {
   position: absolute;
   top: 0;
   right: -30px;
@@ -397,14 +400,14 @@ body{
 }
 
 @keyframes bob {
-  0%{
+  0% {
     transform: scale(0.7);
   }
-  100%{
+  100% {
     transform: scale(1.3);
   }
 }
 
-.game-over{
+.game-over {
   text-align: center;
 }

@@ -4,11 +4,11 @@ import scoreReducer from "./scoreSlice";
 import currentSitesSlice from "./currentSitesSlice";
 
 const store = configureStore({
-    reducer: combineReducers({
-        score: scoreReducer,
-        currentSites: currentSitesSlice
-    })
+  reducer: combineReducers({
+    score: scoreReducer,
+    currentSites: currentSitesSlice,
+  }),
 });
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 export default store;

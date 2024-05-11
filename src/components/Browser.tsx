@@ -1,124 +1,134 @@
-import React, { useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
-import {useDispatch, useSelector, } from 'react-redux';
+import React, { useRef, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { RootState } from '../store';
-import { decrementLife, incrementScore, setIsGameOver } from '../store/scoreSlice';
+import { RootState } from "../store";
+import {
+  decrementLife,
+  incrementScore,
+  setIsGameOver,
+} from "../store/scoreSlice";
 
 const Browser = ({
-    children,
-    loadNewSite,
-    url,
-    isResettingGame
+  children,
+  loadNewSite,
+  url,
+  isResettingGame,
 }: {
-    loadNewSite: Function,
-    url: string,
-    isResettingGame: boolean
+  loadNewSite: Function;
+  url: string;
+  isResettingGame: boolean;
 } & React.ComponentProps<any>) => {
+  const currentSites = useSelector((state: RootState) => state.currentSites);
 
-    const currentSites = useSelector((state: RootState) => state.currentSites)
+  const [otp, setOTP] = useState("");
+  const score = useSelector((state: RootState) => state.score.score);
+  const isGameOver = useSelector((state: RootState) => state.score.isGameOver);
+  const [isCurrentOTPCorrect, setIsCurrentOTPCorrect] = useState(true);
 
-    const [otp, setOTP] = useState(""); 
-    const score = useSelector((state: RootState) => state.score.score)
-    const isGameOver = useSelector((state: RootState) => state.score.isGameOver);
-    const [isCurrentOTPCorrect, setIsCurrentOTPCorrect] = useState(true);
-    
-    const dispatch = useDispatch();
-    const inp: any = useRef(null);
+  const dispatch = useDispatch();
+  const inp: any = useRef(null);
 
-    function checkOTP(){
-        if(otp != String(currentSites[0].otp)){
-            setIsCurrentOTPCorrect(false);
-            dispatch(decrementLife());
-            document.body.classList.add("flash");
-            document.body.addEventListener("animationend", () => {
-                document.body.classList.remove("flash");
-            });
-            setOTP("");
-        }
-        else{
-            dispatch(incrementScore());
-            setOTP("");
-            loadNewSite();
-            setIsCurrentOTPCorrect(true);
-        }
-        if(inp.current){
-            inp.current.focus();
-        }
+  function checkOTP() {
+    if (otp != String(currentSites[0].otp)) {
+      setIsCurrentOTPCorrect(false);
+      dispatch(decrementLife());
+      document.body.classList.add("flash");
+      document.body.addEventListener("animationend", () => {
+        document.body.classList.remove("flash");
+      });
+      setOTP("");
+    } else {
+      dispatch(incrementScore());
+      setOTP("");
+      loadNewSite();
+      setIsCurrentOTPCorrect(true);
     }
-
-    
-    let maxTime: number;
-    let timerHolder: number;
-    
-    const [timer, setTimer] = useState(maxTime = (10 - score % 5));
-    
-    const resetTime = () => {
-        maxTime = (10 - score % 5);
-    
-        setTimer(maxTime);
-    
-        timerHolder = setInterval(() => {
-            setTimer(prevTime => prevTime - 1)
-        }, 1000);
+    if (inp.current) {
+      inp.current.focus();
     }
+  }
 
-    useEffect(() => {
-        if(isGameOver == true){
-            resetTime();
-        }
-    }, [isResettingGame])
+  let maxTime: number;
+  let timerHolder: number;
 
-    useEffect(() => {
-        
-        resetTime();
-        return(() => {
-            resetTime();
-            clearInterval(timerHolder); 
-           
-        })
-    }, [])
+  const [timer, setTimer] = useState((maxTime = 10 - (score % 5)));
 
-    useEffect(() => {
-        if(timer < 0){
-            // clearInterval(timerHolder);
-            dispatch(setIsGameOver(true));
-        }
-    }, [timer])
+  const resetTime = () => {
+    maxTime = 10 - (score % 5);
 
-    
+    setTimer(maxTime);
 
-    return (
-        <div className="browser-container">
-            <progress value={timer} max={maxTime} /> 
-            <div className="title-bar">{url}</div>
-            <div className="browser-body">
+    timerHolder = setInterval(() => {
+      setTimer((prevTime) => prevTime - 1);
+    }, 1000);
+  };
 
+  useEffect(() => {
+    if (isGameOver == true) {
+      resetTime();
+    }
+  }, [isResettingGame]);
 
-                {children}
-                
-                <input autoFocus aria-autocomplete="none" name="game" ref={inp} type="number" autoComplete="none" accept="number" typeof="number" placeholder="Please enter the OTP here" value={otp} onChange={(e) => setOTP(e.target.value)} onKeyPress={(e) => {if(e.key == "Enter"){checkOTP()}}}/>
+  useEffect(() => {
+    resetTime();
+    return () => {
+      resetTime();
+      clearInterval(timerHolder);
+    };
+  }, []);
 
-                {
-                    isCurrentOTPCorrect ? 
-                        <></>
-                        :
-                        <div className="danger">
-                            You have entered wrong OTP
-                        </div>
-                }
+  useEffect(() => {
+    if (timer < 0) {
+      // clearInterval(timerHolder);
+      dispatch(setIsGameOver(true));
+    }
+  }, [timer]);
 
-                
-                <button className="btn btn-green" onClick={() => checkOTP()}>
-                    Send OTP
-                </button>
+  return (
+    <div className="browser-container">
+      <progress value={timer} max={maxTime} />
+      <div className="title-bar">{url}</div>
+      <div className="browser-body">
+        {children}
 
-                {/* <button className="btn btn-red" onClick={() => dispatch(decrement())}>
+        <input
+          autoFocus
+          aria-autocomplete="none"
+          name="game"
+          ref={inp}
+          type="number"
+          autoComplete="none"
+          accept="number"
+          typeof="number"
+          placeholder="Please enter the OTP here"
+          value={otp}
+          onChange={(e) => setOTP(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key == "Enter") {
+              checkOTP();
+            }
+          }}
+        />
+
+        {isCurrentOTPCorrect ? (
+          <></>
+        ) : (
+          <div className="danger">You have entered wrong OTP</div>
+        )}
+
+        <button className="btn btn-green" onClick={() => checkOTP()}>
+          Send OTP
+        </button>
+
+        {/* <button 
+           *  className="btn btn-red" 
+           *  onClick={() => dispatch(decrement())}>
                     Mark as fake site
-                </button> */}
-            </div>
+              </button> 
+        */}
+      </div>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default Browser
+export default Browser;
